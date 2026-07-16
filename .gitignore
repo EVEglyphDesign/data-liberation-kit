@@ -1,0 +1,27 @@
+# Credentials — never commit
+.liberation-kit/credentials.enc
+.liberation-kit/staging/
+
+# Media and history are handled by storage backend (LFS or external)
+# Do not gitignore media/ or history/ directly — the manifests belong in git.
+
+# Incoming staging for LLM sweep
+_incoming/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+.env
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editors
+.vscode/
+.idea/
+*.swp
