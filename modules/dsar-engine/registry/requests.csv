@@ -1,0 +1,2 @@
+request_id,individual_id,individual_jurisdiction,platform_id,jurisdiction,statute,channel,sender_of_record,sent_date,deadline_date,extended_deadline_date,status,current_rung,export_received,export_sha256,export_repo_path,last_event_date
+DSAR-DT01-amazon-pipeda-ca-20260718-001,DT01,pipeda-ca,amazon,pipeda-ca,PIPEDA Principle 4.9 / s.8,portal,individual,2026-07-18,2026-08-17,,SENT,R0,false,,,2026-07-18

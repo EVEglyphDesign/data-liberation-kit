@@ -1,0 +1,65 @@
+# DSAR Platform Registry
+# One record per platform. Extend freely — same shape for every platform.
+# `dsar_contact` values should be re-verified at wiring time; privacy contact
+# addresses change. Where a platform mandates a web portal, that is noted and the
+# request is still logged as sent (drafts-only: individual submits, engine records).
+
+platforms:
+  - id: amazon
+    name: Amazon
+    self_serve_export: "Account > Data and Privacy > Request Your Data ('Your Orders' or 'Request All Your Data')"
+    portal_required: true
+    dsar_contact: ""            # verify: privacy web form is the mandated channel
+    notes: >
+      Legacy /gp/b2b/reports (Order History Reports CSV) has been retired on amazon.ca.
+      Use Request Your Data (DSAR) instead. Returns a ZIP with CSVs incl. order history,
+      addresses, payment records, browsing history.
+    applicable_jurisdictions: [pipeda-ca, gdpr-eu, uk-gdpr, ccpa-cpra-us-ca, lgpd-br, apps-au]
+
+  - id: google
+    name: Google
+    self_serve_export: "Google Takeout (takeout.google.com) + Google Dashboard"
+    portal_required: true
+    dsar_contact: ""
+    notes: "Takeout is the primary export; DSAR for records beyond Takeout scope."
+    applicable_jurisdictions: [pipeda-ca, gdpr-eu, uk-gdpr, ccpa-cpra-us-ca, lgpd-br, apps-au]
+
+  - id: apple
+    name: Apple
+    self_serve_export: "privacy.apple.com > Request a copy of your data"
+    portal_required: true
+    dsar_contact: ""
+    notes: "Apple Data & Privacy portal is the mandated channel."
+    applicable_jurisdictions: [pipeda-ca, gdpr-eu, uk-gdpr, ccpa-cpra-us-ca, lgpd-br, apps-au]
+
+  - id: meta
+    name: Meta (Facebook / Instagram / WhatsApp)
+    self_serve_export: "Accounts Center > Your information and permissions > Download your information"
+    portal_required: true
+    dsar_contact: ""
+    notes: "Per-app DYI export; WhatsApp export via app > Settings > Account > Request account info."
+    applicable_jurisdictions: [pipeda-ca, gdpr-eu, uk-gdpr, ccpa-cpra-us-ca, lgpd-br, apps-au]
+
+  - id: microsoft
+    name: Microsoft
+    self_serve_export: "account.microsoft.com > Privacy > Download your data"
+    portal_required: true
+    dsar_contact: ""
+    notes: "Privacy dashboard export."
+    applicable_jurisdictions: [pipeda-ca, gdpr-eu, uk-gdpr, ccpa-cpra-us-ca, lgpd-br, apps-au]
+
+  - id: x
+    name: X (Twitter)
+    self_serve_export: "Settings > Your account > Download an archive of your data"
+    portal_required: true
+    dsar_contact: ""
+    notes: "Archive request; re-auth required."
+    applicable_jurisdictions: [pipeda-ca, gdpr-eu, uk-gdpr, ccpa-cpra-us-ca, lgpd-br, apps-au]
+
+  - id: linkedin
+    name: LinkedIn
+    self_serve_export: "Settings & Privacy > Data privacy > Get a copy of your data"
+    portal_required: true
+    dsar_contact: ""
+    notes: "Full export can take up to ~24h+."
+    applicable_jurisdictions: [pipeda-ca, gdpr-eu, uk-gdpr, ccpa-cpra-us-ca, lgpd-br, apps-au]

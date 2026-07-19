@@ -1,0 +1,54 @@
+# DSAR periodic job definitions
+# These describe WHAT should run and WHEN. Wiring to an actual runner
+# (GitHub Actions cron, or Perplexity scheduled tasks) is done per deployment.
+# Default posture: drafts-only. Jobs generate/queue drafts and update the ledger;
+# the individual remains sender-of-record. No job sends without the configured channel.
+
+jobs:
+  - id: periodic-reissue
+    description: >
+      Re-issue statutory access requests to each platform on a fixed cadence so the
+      individual never has to log into the platforms. Renders the correct
+      jurisdiction template, assigns a new request_id, appends to requests.csv.
+    default_cadence: quarterly        # every 90 days; per-platform override allowed
+    mode: drafts-only
+    on_run:
+      - render request template for each active (individual × platform × jurisdiction)
+      - append new row to registry/requests.csv (status=SENT, rung=R0)
+      - append REQUEST_SENT event to registry/events.csv
+      - commit to repo
+
+  - id: deadline-watch
+    description: >
+      Daily check of open requests against their statutory deadline. Fires the
+      escalation ladder when a clock passes.
+    default_cadence: daily
+    on_run:
+      - for each request with status in [SENT, ACK, EXTENDED] and today >= deadline:
+          - if no adequate response: set status=NONCOMPLIANT, rung=R2
+          - append DEADLINE_PASSED + NONCOMPLIANCE_LOGGED events (with deadline_delta_days)
+          - queue R1 reminder draft (if not already sent) OR flag R3 regulator-complaint draft
+      - commit to repo
+
+  - id: aggregate-rollup
+    description: >
+      Recompute the class-wide accountability picture from requests.csv + events.csv.
+    default_cadence: weekly
+    on_run:
+      - regenerate registry/AGGREGATE.json (by_platform, by_jurisdiction, noncompliance rates)
+      - commit to repo
+
+  - id: ingest-exports
+    description: >
+      When a platform export lands in the intake area, normalize (FTTE), hash
+      (SHA-256 manifest), commit, and mark the matching request FULFILLED.
+    default_cadence: on-arrival        # or daily poll of intake/
+    on_run:
+      - detect new export in intake/
+      - normalize to canonical FTTE schema
+      - write SHA-256 manifest; set export_sha256 + export_repo_path on the request
+      - set status=FULFILLED (or PARTIAL), append RESPONSE_RECEIVED event
+      - commit to repo
+
+# Cadence note: recurring automated jobs have a minimum interval in the runner.
+# quarterly/weekly/daily are all safely above typical minimums.

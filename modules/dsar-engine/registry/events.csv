@@ -1,0 +1,2 @@
+event_id,request_id,event_date,rung,event_type,deadline_delta_days,regulator,institution,accountable_individual,evidence_ref,notes
+EVT-20260718-0001,DSAR-DT01-amazon-pipeda-ca-20260718-001,2026-07-18,R0,REQUEST_SENT,,,,,pending,Operator submitted Amazon Request Your Data (full data history) via privacy portal; drafts-only sender-of-record. Awaiting export ZIP.
