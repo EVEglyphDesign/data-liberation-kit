@@ -1,3 +1,9 @@
+> **⚑ Arrivals register at the front door.**
+> If you were sent here from a public post, a mention, or a professional referral, please [register your arrival](https://github.com/EVEglyphDesign/eveglyph-arrivals/issues/new?template=arrival.yml) at [github.com/EVEglyphDesign](https://github.com/EVEglyphDesign) before continuing. Ninety seconds. Public. Timestamped. Screeners, agents, publicists, journalists, engineers, and principals all use the same door.
+>
+> *Compelled engagement, not asked engagement.*
+
+---
 # data-liberation-kit
 
 **Your data belongs to you. This makes it that way.**
